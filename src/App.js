@@ -3,7 +3,6 @@ import axios from 'axios';
 import { DateTime } from 'luxon';
 
 
-
 require('dotenv').config()
 
 function App() {
@@ -17,8 +16,9 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
 
 
+
   const [url, setUrl] = useState(
-    `https://newsapi.org/v2/top-headlines?country=us&apiKey=acb6921b9e154a198dff2d4b65846e31`
+    `https://newsapi.org/v2/top-headlines?country=us&apiKey=${process.env.REACT_APP_API_KEY}`
 
   );
 
@@ -39,21 +39,19 @@ function App() {
   }, [url]);
 
 
-const REACT_APP_API_KEY = 'acb6921b9e154a198dff2d4b65846e31'
 
 
 
   return (
     <Fragment>
 
-<section className="hero is-success">
+<section className="hero is-success is-small">
   <div className="hero-body">
     <p className="title">
     Welcome to MyNews!
     </p>
-    <p className="subtitle">
+    <p className="subtitle is-italic">
      Your #1 world news site powered by newsapi.org!
-    {DateTime.now().toFormat('LLLL dd yyyy')}
     </p>
     <p className="is-pulled-right">
     {DateTime.now().toFormat('LLLL dd yyyy')}
@@ -65,58 +63,55 @@ const REACT_APP_API_KEY = 'acb6921b9e154a198dff2d4b65846e31'
 
 
 <form onSubmit={event => {
-        setUrl(`https://newsapi.org/v2/everything?q=${query}&sortBy=popularity&apiKey=${REACT_APP_API_KEY}`);
+        setUrl(`https://newsapi.org/v2/everything?q=${query}&apiKey=${process.env.REACT_APP_API_KEY}`);
 
         event.preventDefault();
       }}>
 
-<div >
-  <div >
+
+  <div className="column is-6  is-half is-offset-one-quarter">
 
   <input
           type="text"
           value={query}
           onChange={event => setQuery(event.target.value)}
-          className="input is-primary"
+          className="input is-primary mb-2"
           placeholder="enter a keyword"
 
         />
-          <button className="button is-small is-primary" type="submit">Search</button>
+   <button className="button is-small is-primary" type="submit">Search</button>
+
   </div>
-</div>
+
+
+
+
  </form>
 
       {isError && <div>Something went wrong ...</div>}
 
       {isLoading ? (
-        <div>Loading Top Headlines...</div>
+        <div>Loading Latest Top Headlines...</div>
       ) : (
-        <div>
-<div className="columns is-flex-wrap-wrap p-2 ">
+        <div className="container ">
+<div className="columns is-flex-wrap-wrap is-centered">
 
 {data.articles && data.articles.map(article => (
 
-  <div className="column is-one-third mb-2">
+  <div className="column is-one-quarter box m-1 " >
 
 
 <div key={article.id}>
-      <div className='reverse-columns '>
+      <div className='reverse-columns is-link is-small'>
       <a href={article.url}>{article.title}</a>
-
-       </div>
 
 
       <img src={article.urlToImage} alt="article urls"></img>
 
-
-      <div className='reverse-columns'>
-
-      <p className="is-italic is-pulled-right is-size-7 ">
-Source: {article.source.name}
-        </p>
-
-        <p className="is-size-7">
-        Last updated: {DateTime.fromISO(article.publishedAt).toFormat('LLLL dd yyyy')}
+      <p className="is-italic subtitle is-7">
+ {article.source.name}.
+ <br/>
+         Last Updated: {DateTime.fromISO(article.publishedAt).toFormat('LLLL dd yyyy')}
 
         </p>
 
@@ -129,10 +124,19 @@ Source: {article.source.name}
   </div>
 
  ))}
+
+
+
 </div>
         </div>
       )}
-
+<footer className="footer mt-4">
+  <div className="content has-text-centered">
+    <p>
+      <strong>MyNews</strong> by <a href="https://jgamworks.com">jgamworks.com</a>.
+    </p>
+  </div>
+</footer>
 
     </Fragment>
   );

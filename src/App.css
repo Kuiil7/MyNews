@@ -1,54 +1,11 @@
-#box-row {
-  display: flex;
-  flex-wrap: wrap;
+html { height: 100%; }
+body {
+    min-height:100%;
+    position:relative;
+    padding-bottom:[footer-height]
 }
+.footer {
+    position: absolute;
+    left: 0 ; right: 0; bottom: 0;
 
-
-
-.container {
-}
-
-.page{
-padding: 10px;
-  border: 1px solid #dcdcdc;
-  border-radius: 6px;
-  margin-right: 10px;
-  cursor: pointer;
-}
-
-.disabled{
-  cursor: not-allowed;
-
-}
-
-.active{
-border: 2px solid #000;
-  font-weight: bold;
-}
-
-.previous{
-  padding: 10px;
-  border-radius: 6px;
-  margin-right: 10px;
-  cursor: pointer;
-}
-
-.break{
-  padding: 10px;
-}
-
-.next{
-  padding: 10px;
-  border-radius: 6px;
-  margin-right: 10px;
-  cursor: pointer;
-}
-
-
-
-@media(max-width: 767px) { /* <== You can change this break point as per your  needs */
-  .reverse-columns {
-    flex-direction: column-reverse;
-    display: flex;
-  }
 }

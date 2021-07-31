@@ -2,6 +2,7 @@ import React, { Fragment, useState, useEffect } from 'react';
 import axios from 'axios';
 import { DateTime } from 'luxon';
 
+import './App.css'
 
 require('dotenv').config()
 
@@ -18,7 +19,7 @@ function App() {
 
 
   const [url, setUrl] = useState(
-    `https://newsapi.org/v2/top-headlines?country=us&apiKey=${process.env.REACT_APP_API_KEY}`
+    `  https://newsapi.org/v2/top-headlines?country=us&apiKey=${process.env.REACT_APP_API_KEY}`
 
   );
 
@@ -26,9 +27,13 @@ function App() {
 
   useEffect(() => {
     const fetchData = async () => {
+
       setIsLoading(true);
+
       setIsError(false);
+
       const result = await axios(url);
+
       setData(result.data);
       setIsLoading(false);
       console.log(result.data)
@@ -50,20 +55,25 @@ function App() {
     <p className="title">
     Welcome to MyNews!
     </p>
-    <p className="subtitle is-italic">
-     Your #1 world news site powered by newsapi.org!
-    </p>
-    <p className="is-pulled-right">
-    {DateTime.now().toFormat('LLLL dd yyyy')}
+    <p className="subtitle is-7 is-italic">
+     Your #1 World News search site powered by Newsapi.org!
+     <br/>
+     Search every article published by over 80,000 different sources large and small in the last 3 years.
 
     </p>
+
+    <p className="is-pulled-right">
+    Today's date: {DateTime.now().toFormat('LLLL dd yyyy')}
+
+    </p>
+
   </div>
 </section>
 
 
 
 <form onSubmit={event => {
-        setUrl(`https://newsapi.org/v2/everything?q=${query}&apiKey=${process.env.REACT_APP_API_KEY}`);
+        setUrl(`https://newsapi.org/v2/everything?q=${query}&sortBy=popularity&apiKey=${process.env.REACT_APP_API_KEY}`);
 
         event.preventDefault();
       }}>
@@ -96,15 +106,15 @@ function App() {
         <div className="container ">
 <div className="columns is-flex-wrap-wrap is-centered">
 
-{data.articles && data.articles.map(article => (
 
-  <div className="column is-one-quarter box m-1 " >
+{data.articles && data.articles.map((article,i) => (
+
+  <div className="column is-one-quarter box m-1  " key={i} >
 
 
-<div key={article.id}>
       <div className='reverse-columns is-link is-small'>
-      <a href={article.url}>{article.title}</a>
 
+      <a href={article.url}>{article.title}</a>
 
       <img src={article.urlToImage} alt="article urls"></img>
 
@@ -112,16 +122,13 @@ function App() {
  {article.source.name}.
  <br/>
          Last Updated: {DateTime.fromISO(article.publishedAt).toFormat('LLLL dd yyyy')}
-
         </p>
 
         </div>
-
     </div>
 
 
 
-  </div>
 
  ))}
 
@@ -130,13 +137,18 @@ function App() {
 </div>
         </div>
       )}
-<footer className="footer mt-4">
-  <div className="content has-text-centered">
-    <p>
-      <strong>MyNews</strong> by <a href="https://jgamworks.com">jgamworks.com</a>.
+
+
+<div >
+
+  <div className="content has-text-centered mt-6 has-background-primary" style={{height:"60px"}}>
+    <p className="has-text-white m-7 is-justify-content-center">
+      MyNews by <a className="has-text-white " href="https://jgamworks.com">jgamworks.com</a>.
     </p>
   </div>
-</footer>
+
+</div>
+
 
     </Fragment>
   );

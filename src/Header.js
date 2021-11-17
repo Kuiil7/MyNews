@@ -1,16 +1,15 @@
 import React from "react";
-import { DateTime } from 'luxon';
 
 
 const Header = () => {
   return (
     < >
-  <section class="hero is-small is-primary">
-  <div class="hero-body">
-    <p class="title">
+  <section className="hero is-small is-primary">
+  <div className="hero-body">
+    <p className="title">
       Welcome to MyNews!
     </p>
-    <p class="subtitle">
+    <p className="subtitle">
       Your #1 news search site powered by NewsAPI.org.
     </p>
   </div>

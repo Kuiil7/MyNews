@@ -5,12 +5,8 @@ import { DateTime } from 'luxon';
 const Content = (props) => {
   return (
     < >
-    
-<article className="message is-info">
-  <div className="message-header">
-    <p>{props.title}</p>
-  </div>
-  <div className="message-body">
+
+<div > <a href={props.url}> {props.title}</a></div>
   <img src={props.urlToImage} alt="props urls"></img>
   <a href={props.url}> {props.description}</a>
   <p className="is-italic subtitle is-7">
@@ -18,8 +14,8 @@ const Content = (props) => {
 <br/>
      Last Updated: {DateTime.fromISO(props.publishedAt).toFormat('LLLL dd yyyy')}
       </p>
-  </div>
-</article>
+
+
     </>
   );
 };

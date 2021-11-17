@@ -30,6 +30,8 @@ const App = () => {
   return (
     <>
     <Header />
+
+    <div className="container">
     <div className="columns">
   <div className="column is-full p-4">
     
@@ -50,12 +52,17 @@ mt-3
           className="input is-info mb-2 is-rounded"
           placeholder="enter a keyword"
         />
-<button className="button is-small is-info  is-rounded" type="submit">Search</button>
+<button className="button is-small is-info  is-rounded is-inverted"  type="submit">Search</button>
   </div>
   </div>
  </form>
 
-<div className="columns is-flex-wrap-wrap is-justify-content-center  "   >
+<div className="columns  
+is-mobile
+
+is-flex-wrap-nowrap
+scrolling-wrapper
+scrollbar-hidden"   >
       {articleData.articles && articleData.articles.map((article, articleIndex) => (
 
 <div className="column is-one-quarter box m-1  " key={articleIndex} >
@@ -72,6 +79,7 @@ description={article.description}
  </div>
 
   </div>
+</div>
 </div>
       {isError && <div>Error fetching data.</div>}
     </>

@@ -4,11 +4,11 @@ import axios from 'axios';
 import Content from '../Content'
 require('dotenv').config()
 
-const Sports= () => {
+const Health = () => {
 
   const [articleData, setArticleData] = useState({articles:[]});
-  const [url, setUrl] = useState(`https://newsapi.org/v2/top-headlines?country=us&category=sports&apiKey=${process.env.REACT_APP_NEWS_API_KEY}`);
- 
+  const url = `https://newsapi.org/v2/top-headlines?country=us&category=health&apiKey=${process.env.REACT_APP_NEWS_API_KEY}`
+
   useEffect(() => {
     const fetchData = async () => {
       const result = await axios(url);
@@ -19,21 +19,29 @@ const Sports= () => {
   }, [url]);
 
 
+
   return (
     <>
     <div className="container pt-5">
-    <p className="title is-1 pb-3 has-text-white">U.S. Sports </p>
+    <p className="title is-1-desktop is-3-mobile p-3 has-text-white">U.S. Health</p>
     <div className="columns">
-   
+
   <div className="column is-full p-4">
-<div className="columns  
+<div className="columns
 is-mobile
 is-flex-wrap-nowrap
 scrolling-wrapper
 scrollbar-hidden"   >
       {articleData.articles && articleData.articles.map((article, articleIndex) => (
 
-<div className="column is-one-quarter box m-1  " key={articleIndex} >
+<div className="column
+is-three-quarters-mobile
+is-two-thirds-tablet
+is-half-desktop
+is-one-third-widescreen
+is-one-quarter-fullhd
+box
+m-1  " key={articleIndex} >
 <Content
 url={article.url}
 name={article.source.name}
@@ -52,4 +60,4 @@ description={article.description}
     </>
   );
 };
-export default Sports;
+export default Health;

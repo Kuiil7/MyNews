@@ -3,12 +3,12 @@ import React, { Fragment, useState, useEffect } from 'react';
 import axios from 'axios';
 import Header from './components/Header'
 import Content from './components/Content'
-import TopHeadlines from './components/NewsAPI/TopHeadlines';
-import Sports from './components/NewsAPI/Sports';
-import Entertainment from './components/NewsAPI/Entertainment';
-import Health from './components/NewsAPI/Health';
-import Science from './components/NewsAPI/Science';
-import Technology from './components/NewsAPI/Technology';
+import TopHeadlines from './components/NewsAPIs/TopHeadlines';
+import Sports from './components/NewsAPIs/Sports';
+import Entertainment from './components/NewsAPIs/Entertainment';
+import Health from './components/NewsAPIs/Health';
+import Science from './components/NewsAPIs/Science';
+import Technology from './components/NewsAPIs/Technology';
 
 require('dotenv').config()
 
@@ -33,7 +33,7 @@ const App = () => {
     fetchData();
   }, [url]);
 
-  
+
   return (
     <>
     <Header />
@@ -41,7 +41,7 @@ const App = () => {
     <div className="container">
     <div className="columns">
   <div className="column is-full p-4">
-    
+
   <form onSubmit={event => {
         setUrl(`https://newsapi.org/v2/everything?q=${query}&apiKey=${process.env.REACT_APP_NEWS_API_KEY}`);
         event.preventDefault();
@@ -60,7 +60,7 @@ mb-4
           className="input is-info mb-2 is-rounded"
           placeholder="enter a keyword"
           onClick={() => setShow(!show)}
-      
+
 
         />
 <button className="button is-small is-info  is-rounded is-inverted"  type="submit">Search</button>
@@ -72,13 +72,14 @@ mb-4
  {isLoading ? (
   <div><p className="has-text-white"> Loading...</p></div>
 ) : (
-<div className="columns  
+<div className="columns
 is-mobile
 is-flex-wrap-nowrap
-scrolling-wrapper
-scrollbar-hidden"   >
-      {articleData.articles && articleData.articles.map((article, articleIndex) => (
-<div className="column is-one-quarter box m-1  " key={articleIndex} >
+
+"
+>
+{articleData.articles && articleData.articles.map((article, articleIndex) => (
+<div className="column" key={articleIndex}>
 <Content
 url={article.url}
 name={article.source.name}

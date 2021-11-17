@@ -4,9 +4,9 @@ import React from "react";
 const Header = () => {
   return (
     < >
-  <section className="hero is-small is-info">
+  <section className="hero is-small is-info has-text-centered">
   <div className="hero-body">
-    <p className="title">
+    <p className="title is-1">
       Welcome to MyNews!
     </p>
     <p className="subtitle is-italic">

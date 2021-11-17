@@ -8,8 +8,6 @@ body {
 
 }
 
-
-
 .nowhitespace {
   white-space: nowrap;
 }
@@ -27,11 +25,3 @@ body {
   overflow-x: scroll;
 }
 
-.scrollbar-hidden::-webkit-scrollbar {
-  display: none;
-}
-
-.scrollbar-hidden {
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-}

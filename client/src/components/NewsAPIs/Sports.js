@@ -7,16 +7,17 @@ require('dotenv').config()
 const Sports= () => {
 
   const [articleData, setArticleData] = useState({articles:[]});
-  const url = `https://newsapi.org/v2/top-headlines?country=us&category=sports&apiKey=${process.env.REACT_APP_NEWS_API_KEY}`
+
+  const sportsEndPoint = `http://localhost:5000/sports`
 
   useEffect(() => {
     const fetchData = async () => {
-      const result = await axios(url);
+      const result = await axios(sportsEndPoint);
       setArticleData(result.data);
       console.log(result.data)
     };
     fetchData();
-  }, [url]);
+  }, [sportsEndPoint]);
 
 
   return (

@@ -4,26 +4,27 @@ import axios from 'axios';
 import Content from '../Content'
 require('dotenv').config()
 
-const Entertainment = () => {
+const Science = () => {
 
   const [articleData, setArticleData] = useState({articles:[]});
-  const url = `https://newsapi.org/v2/top-headlines?country=us&category=entertainment&apiKey=${process.env.REACT_APP_NEWS_API_KEY}`
+
+  const scienceEndPoint= `http://localhost:5000/science`
 
   useEffect(() => {
     const fetchData = async () => {
-      const result = await axios(url);
+      const result = await axios(scienceEndPoint);
       setArticleData(result.data);
       console.log(result.data)
     };
     fetchData();
-  }, [url]);
+  }, [scienceEndPoint]);
 
 
 
   return (
     <>
     <div className="container pt-5">
-    <p className="title is-1-desktop is-3-mobile p-3 has-text-white">U.S. Entertainment</p>
+    <p className="title is-1-desktop is-3-mobile p-3 has-text-white">U.S. Science</p>
     <div className="columns">
 
   <div className="column is-full p-4">
@@ -60,4 +61,4 @@ description={article.description}
     </>
   );
 };
-export default Entertainment;
+export default Science;

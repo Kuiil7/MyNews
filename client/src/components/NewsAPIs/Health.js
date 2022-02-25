@@ -7,16 +7,17 @@ require('dotenv').config()
 const Health = () => {
 
   const [articleData, setArticleData] = useState({articles:[]});
-  const url = `https://newsapi.org/v2/top-headlines?country=us&category=health&apiKey=${process.env.REACT_APP_NEWS_API_KEY}`
+
+  const healthEndPoint = `http://localhost:5000/health`
 
   useEffect(() => {
     const fetchData = async () => {
-      const result = await axios(url);
+      const result = await axios(healthEndPoint);
       setArticleData(result.data);
       console.log(result.data)
     };
     fetchData();
-  }, [url]);
+  }, [healthEndPoint]);
 
 
 

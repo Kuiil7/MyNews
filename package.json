@@ -1,48 +1,21 @@
 {
-  "name": "mynews",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "@blueprintjs/core": "^3.47.0",
-    "@testing-library/jest-dom": "^5.11.10",
-    "@testing-library/react": "^11.2.6",
-    "@testing-library/user-event": "^12.8.3",
-    "axios": "^0.21.1",
-    "bulma": "^0.9.3",
-    "dotenv": "^8.2.0",
-    "fontawesome": "^5.6.3",
-    "geolocation": "^0.2.0",
-    "luxon": "^1.28.0",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-geolocated": "^3.2.0",
-    "react-icons": "^4.2.0",
-    "react-router-dom": "^5.3.0",
-    "react-scripts": "^4.0.3",
-    "use-local-storage-state": "^10.0.0"
-  },
+  "name": "enote_passport",
+  "version": "1.0.0",
+  "description": "cloud-based note app",
+  "main": "index.js",
   "scripts": {
-    "start": "set PORT=3000 && react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "concurrently \"cd server && node server.js\" \"cd client && npm start\""
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Kuiil7/eNote.git"
   },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  }
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Kuiil7/eNote/issues"
+  },
+  "homepage": "https://github.com/Kuiil7/eNote#readme"
+
 }

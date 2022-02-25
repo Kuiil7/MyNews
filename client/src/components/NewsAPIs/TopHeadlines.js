@@ -4,26 +4,27 @@ import axios from 'axios';
 import Content from '../Content'
 require('dotenv').config()
 
-const Technology = () => {
+const Topheadlines = () => {
 
   const [articleData, setArticleData] = useState({articles:[]});
-  const url = `https://newsapi.org/v2/top-headlines?country=us&category=technology&apiKey=${process.env.REACT_APP_NEWS_API_KEY}`
+
+  const topHeadlinesURL = `http://localhost:5000/topheadlines`
 
   useEffect(() => {
     const fetchData = async () => {
-      const result = await axios(url);
+      const result = await axios(topHeadlinesURL);
       setArticleData(result.data);
       console.log(result.data)
     };
     fetchData();
-  }, [url]);
+  }, [topHeadlinesURL]);
 
 
 
   return (
     <>
-    <div className="container pt-5">
-    <p className="title is-1-desktop is-3-mobile p-3 has-text-white">U.S. Technology</p>
+    <div className="container">
+    <p className="title is-1-desktop is-3-mobile p-3 has-text-white">U.S. Top Headlines</p>
     <div className="columns">
 
   <div className="column is-full p-4">
@@ -40,8 +41,8 @@ is-two-thirds-tablet
 is-half-desktop
 is-one-third-widescreen
 is-one-quarter-fullhd
- box m-1
- " key={articleIndex} >
+box
+m-1  " key={articleIndex} >
 <Content
 url={article.url}
 name={article.source.name}
@@ -60,4 +61,4 @@ description={article.description}
     </>
   );
 };
-export default Technology;
+export default Topheadlines;

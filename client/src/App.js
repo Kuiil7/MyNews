@@ -43,7 +43,7 @@ const App = () => {
   <div className="column is-full p-4">
 
   <form onSubmit={event => {
-        setUrl(`https://newsapi.org/v2/everything?q=${query}&apiKey=${process.env.REACT_APP_NEWS_API_KEY}`);
+        setUrl(`http://localhost:5000/querySearch`);
         event.preventDefault();
       }}>
 

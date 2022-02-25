@@ -4,26 +4,26 @@ import axios from 'axios';
 import Content from '../Content'
 require('dotenv').config()
 
-const Science = () => {
+const Entertainment = () => {
 
   const [articleData, setArticleData] = useState({articles:[]});
-  const url = `https://newsapi.org/v2/top-headlines?country=us&category=science&apiKey=${process.env.REACT_APP_NEWS_API_KEY}`
+
+  const entertainmentEndPoint = `http://localhost:5000/entertainment`
 
   useEffect(() => {
     const fetchData = async () => {
-      const result = await axios(url);
+      const result = await axios(entertainmentEndPoint);
       setArticleData(result.data);
       console.log(result.data)
     };
     fetchData();
-  }, [url]);
-
+  }, [entertainmentEndPoint]);
 
 
   return (
     <>
     <div className="container pt-5">
-    <p className="title is-1-desktop is-3-mobile p-3 has-text-white">U.S. Science</p>
+    <p className="title is-1-desktop is-3-mobile p-3 has-text-white">U.S. Entertainment</p>
     <div className="columns">
 
   <div className="column is-full p-4">
@@ -31,9 +31,9 @@ const Science = () => {
 is-mobile
 is-flex-wrap-nowrap
 scrolling-wrapper
-scrollbar-hidden"   >
-      {articleData.articles && articleData.articles.map((article, articleIndex) => (
+scrollbar-hidden">
 
+{articleData.articles && articleData.articles.map((article, articleIndex) => (
 <div className="column
 is-three-quarters-mobile
 is-two-thirds-tablet
@@ -60,4 +60,4 @@ description={article.description}
     </>
   );
 };
-export default Science;
+export default Entertainment;

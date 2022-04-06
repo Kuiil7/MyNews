@@ -2,29 +2,33 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Content from '../Content'
+import Header from '../layout/Header'
+import NewsHeader from '../layout/NewsHeader'
 require('dotenv').config()
 
-const Topheadlines = () => {
+const Science = () => {
 
   const [articleData, setArticleData] = useState({articles:[]});
 
-  const topHeadlinesURL = `http://localhost:5000/topheadlines`
+  const scienceEndPoint= `http://localhost:5000/science`
 
   useEffect(() => {
     const fetchData = async () => {
-      const result = await axios(topHeadlinesURL);
+      const result = await axios(scienceEndPoint);
       setArticleData(result.data);
       console.log(result.data)
     };
     fetchData();
-  }, [topHeadlinesURL]);
+  }, [scienceEndPoint]);
 
 
 
   return (
     <>
-    <div className="container">
-    <p className="title is-1-desktop is-3-mobile p-3 has-text-white">U.S. Top Headlines</p>
+    <Header />
+    <div className="container pt-5">
+    <NewsHeader />
+    <p className="title is-1-desktop is-3-mobile p-3 has-text-white">U.S. Science</p>
     <div className="columns">
 
   <div className="column is-full p-4">
@@ -61,4 +65,4 @@ description={article.description}
     </>
   );
 };
-export default Topheadlines;
+export default Science;

@@ -2,6 +2,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Content from '../Content'
+import Header from '../layout/Header'
+import NewsHeader from '../layout/NewsHeader'
 require('dotenv').config()
 
 const Sports= () => {
@@ -22,7 +24,9 @@ const Sports= () => {
 
   return (
     <>
+       <Header />
     <div className="container pt-5">
+    <NewsHeader />
     <p className="title is-1-desktop is-3-mobile p-3 has-text-white">U.S. Sports </p>
     <div className="columns">
 

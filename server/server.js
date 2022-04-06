@@ -2,7 +2,15 @@ const express = require('express');
 const cors = require('cors');
 const app = express();
 const axios = require('axios');
+const newsr=express.Router()
+const bodyParser = require('body-parser');
+
+
 require('dotenv').config()
+
+app.use(cors());
+
+app.use(bodyParser.urlencoded({ extended: true }));
 
 const topHeadlinesAPI = `https://newsapi.org/v2/top-headlines?country=us&apiKey=${process.env.REACT_APP_NEWS_API_KEY}`
 const sportsAPI = `https://newsapi.org/v2/top-headlines?country=us&category=sports&apiKey=${process.env.REACT_APP_NEWS_API_KEY}`
@@ -10,12 +18,8 @@ const healthAPI = `https://newsapi.org/v2/top-headlines?country=us&category=heal
 const entertainmentAPI = `https://newsapi.org/v2/top-headlines?country=us&category=entertainment&apiKey=${process.env.REACT_APP_NEWS_API_KEY}`
 const technologyAPI = `https://newsapi.org/v2/top-headlines?country=us&category=technology&apiKey=${process.env.REACT_APP_NEWS_API_KEY}`
 const scienceAPI = `https://newsapi.org/v2/top-headlines?country=us&category=science&apiKey=${process.env.REACT_APP_NEWS_API_KEY}`
-//const querySearchAPI = `https://newsapi.org/v2/everything?q=${query}&apiKey=${process.env.REACT_APP_NEWS_API_KEY}`
-app.use(cors());
 
-app.get('/', (req, res) => {
-  res.send('go to /topheadlines to see MyNews')
-});
+
 
 app.get('/topheadlines', (req, res) => {
   axios.get(topHeadlinesAPI)
@@ -37,7 +41,7 @@ app.get('/sports', (req, res) => {
       });
   });
 
-  app.get('/health', (req, res) => {
+app.get('/health', (req, res) => {
     axios.get(healthAPI)
       .then(response => {
         res.json(response.data);
@@ -48,7 +52,7 @@ app.get('/sports', (req, res) => {
   });
 
 
-  app.get('/entertainment', (req, res) => {
+app.get('/entertainment', (req, res) => {
     axios.get(entertainmentAPI)
       .then(response => {
         res.json(response.data);
@@ -78,8 +82,9 @@ app.get('/sports', (req, res) => {
       });
   });
 
-  app.get('/querySearch', (req, res) => {
-    axios.get(querySearchAPI)
+  app.get("/search/:query", (req, res) => {
+    const {query} = req.params;
+    axios.get(`https://newsapi.org/v2/everything?q=${query}&apiKey=${process.env.REACT_APP_NEWS_API_KEY}`)
       .then(response => {
         res.json(response.data);
       })
@@ -87,9 +92,6 @@ app.get('/sports', (req, res) => {
         console.log(error);
       });
   });
-
-
-
 
 
 let port = process.env.PORT || 5000;

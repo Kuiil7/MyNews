@@ -10,7 +10,7 @@ const Header = () => {
       Welcome to MyNews!
     </p>
     <p className="subtitle is-italic">
-      Your #1 news search site powered by<a href="https://newsapi.org/"> NewsAPI.org.</a>
+      Your #1 U.S. news search site powered by<a href="https://newsapi.org/"> NewsAPI.org.</a>
     </p>
   </div>
 </section>

@@ -2,21 +2,22 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Content from '../Content'
-import Header from '../layout/Header'
-import NewsHeader from '../layout/NewsHeader'
 
-require('dotenv').config()
 
 const Technology = () => {
 
   const [articleData, setArticleData] = useState({articles:[]});
   const technologyEndPoint = `http://localhost:5000/technology`
+  const [isLoading, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
+      setIsLoading(true);
+      setIsError(false)
       const result = await axios(technologyEndPoint);
       setArticleData(result.data);
-      console.log(result.data)
+      setIsLoading(false);
     };
     fetchData();
   }, [technologyEndPoint]);
@@ -24,13 +25,14 @@ const Technology = () => {
 
   return (
     <>
-  <Header />
     <div className="container pt-5">
-    <NewsHeader />
     <p className="title is-1-desktop is-3-mobile p-3 has-text-white">U.S. Technology</p>
+    {isError && <div>Something went wrong ...</div>}
+    {isLoading ? (<div className='has-text-white'>Loading...</div>) : (
     <div className="columns">
   <div className="column is-full p-4">
 <div className="columns
+p-4
 is-mobile
 is-flex-wrap-nowrap
 scrolling-wrapper
@@ -59,6 +61,7 @@ description={article.description}
  </div>
   </div>
 </div>
+    )}
 </div>
 
     </>

@@ -9,13 +9,12 @@ const mainContent = <div className="container px-5">
 <div className="column ">
 <div className="tabs is-centered">
 <ul>
-<li><Link className="navbar-item has-text-white" to="/topheadlines"> Top Headlines</Link></li>
+<li><Link className="navbar-item has-text-white" to="/topheadlines"> Search</Link></li>
 <li><Link className="navbar-item has-text-white" to="/sports"> Sport</Link></li>
 <li><Link className="navbar-item has-text-white" to="/health"> Health</Link></li>
 <li><Link className="navbar-item has-text-white" to="/entertainment"> Entertainment</Link></li>
 <li><Link className="navbar-item has-text-white" to="/technology"> Technology</Link></li>
 <li><Link className="navbar-item has-text-white" to="/science"> Science</Link></li>
-<li><Link className="navbar-item has-text-white" to="/testquery"> TestQuery</Link></li>
 
 </ul>
 </div>

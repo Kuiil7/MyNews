@@ -2,12 +2,15 @@
   "name": "mynews",
   "version": "1.0.0",
   "description": "A news searching app",
+  "homepage": "https://kuiil7.github.io/mynews",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "concurrently \"cd server && node server.js\" \"cd client && npm start\"",
-    "build": "npm install --prefix client && npm run build --prefix client"
-
+    "build": "npm install --prefix client && npm run build --prefix client",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d client/build",
+    "deploy:all": "npm run predeploy && npm run deploy"
   },
   "repository": {
     "type": "git",
@@ -18,5 +21,9 @@
   "bugs": {
     "url": "https://github.com/Kuiil7/mynews/issues"
   },
-  "homepage": "https://github.com/Kuiil7/mynews#readme"
+  "dependencies": {
+    "concurrently": "^8.2.2",
+    "cors": "^2.8.5",
+    "gh-pages": "^6.1.1"
+  }
 }

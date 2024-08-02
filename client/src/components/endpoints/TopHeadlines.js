@@ -17,6 +17,7 @@ const TopHeadlines = () => {
       setIsLoading(true);
       setIsError(false)
       const results = await axios(topHeadlinesURL);
+      console.log(results.data); 
       setTopHeadlinesData(results.data);
       setIsLoading(false);
     };
@@ -52,43 +53,37 @@ const TopHeadlines = () => {
     </div>
     </div>
 </form>
-    <p className="title is-1-desktop is-3-mobile p-3 has-text-white">Top Headlines</p>
+    <p className="title is-1-desktop is-3-mobile p-3 has-text-white has-text-centered">Top Headlines</p>
 
     {isError && <div>Something went wrong ...</div>}
-    {isLoading ? (<div className='has-text-white'>Loading...</div>) : (
+    {isLoading ? (<div className='has-text-white '>Loading...</div>) : (
 
-    <div className="columns">
-  <div className="column is-full p-4">
-<div className="columns
-p-4
-is-mobile
-is-flex-wrap-nowrap
-scrolling-wrapper
-scrollbar-hidden"   >
+    <div className="columns is-flex is-flex-direction-column is-wrap is-align-items-center " >
+
 
 {topHeadlinesData.articles && topHeadlinesData.articles.map((article, articleIndex) => (
 
-<div className="column
-is-three-quarters-mobile
-is-two-thirds-tablet
-is-half-desktop
-is-one-third-widescreen
-is-one-quarter-fullhd
- box m-1
- " key={articleIndex} >
+<div className="column rcorners1  is-full is-info has-background-white m-4" 
+style={{ color: 'blue', height: 'auto', width:'90%' }}   key={articleIndex} >
+
+
 <Content
 url={article.url}
 name={article.source.name}
-urlToImage={article.urlToImage}
+urlToImage={article.urlToImage ? article.urlToImage : undefined}
 publishedAt={article.publishedAt}
 title={article.title}content={article.content}
 description={article.description}
 />
+
+ 
+
   </div>
+
 ))}
- </div>
+
   </div>
-</div>
+
     )}
 </div>
 

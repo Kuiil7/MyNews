@@ -12,33 +12,20 @@ const TopHeadlines = () => {
   const [query, setQuery] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [hasMore, setHasMore] = useState(true);
-  
+
   useEffect(() => {
     const fetchData = async () => {
       setIsLoading(true);
-      setIsError(false);
-      try {
-        const results = await axios.get(topHeadlinesURL, {
-          params: {
-            page: currentPage,
-            pageSize: 10 // Adjust this as needed
-          }
-        });
-        setTopHeadlinesData(prevData => ({
-          articles: [...prevData.articles, ...results.data.articles]
-        }));
-        setHasMore(results.data.articles.length > 0);
-      } catch (error) {
-        setIsError(true);
-      } finally {
-        setIsLoading(false);
-      }
+      setIsError(false)
+      const results = await axios(topHeadlinesURL);
+      console.log(results.data); 
+      setTopHeadlinesData(results.data);
+      setIsLoading(false);
     };
     fetchData();
-  }, [topHeadlinesURL, currentPage]);
-  
+  }, [topHeadlinesURL]);
+
+
   return (
     <>
     <div className="container pt-5">

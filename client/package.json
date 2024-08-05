@@ -1,6 +1,8 @@
 {
   "name": "mynews",
-  "version": "0.1.0",
+  "version": "1.0.0",
+  "description": "A news searching app",
+  "homepage": "https://kuiil7.github.io/mynews",
   "private": true,
   "dependencies": {
     "axios": "^0.21.1",

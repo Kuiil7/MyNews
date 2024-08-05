@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Content from '../Content'
+import Ticker from '../Ticker';
 
 
 const TopHeadlines = () => {
@@ -11,20 +12,33 @@ const TopHeadlines = () => {
   const [query, setQuery] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
-
+  const [currentPage, setCurrentPage] = useState(1);
+  const [hasMore, setHasMore] = useState(true);
+  
   useEffect(() => {
     const fetchData = async () => {
       setIsLoading(true);
-      setIsError(false)
-      const results = await axios(topHeadlinesURL);
-      console.log(results.data); 
-      setTopHeadlinesData(results.data);
-      setIsLoading(false);
+      setIsError(false);
+      try {
+        const results = await axios.get(topHeadlinesURL, {
+          params: {
+            page: currentPage,
+            pageSize: 10 // Adjust this as needed
+          }
+        });
+        setTopHeadlinesData(prevData => ({
+          articles: [...prevData.articles, ...results.data.articles]
+        }));
+        setHasMore(results.data.articles.length > 0);
+      } catch (error) {
+        setIsError(true);
+      } finally {
+        setIsLoading(false);
+      }
     };
     fetchData();
-  }, [topHeadlinesURL]);
-
-
+  }, [topHeadlinesURL, currentPage]);
+  
   return (
     <>
     <div className="container pt-5">
@@ -46,7 +60,7 @@ const TopHeadlines = () => {
       setQuery(event.target.value)
       }
       className="input is-info mb-2  is-rounded"
-      placeholder="enter a city name"
+      placeholder="enter a keyword"
     />
     <button className="button is-small is-info is-inverted is-rounded" type="submit">Search</button>
     </div>
@@ -58,10 +72,27 @@ const TopHeadlines = () => {
     {isError && <div>Something went wrong ...</div>}
     {isLoading ? (<div className='has-text-white '>Loading...</div>) : (
 
-    <div className="columns is-flex is-flex-direction-column is-wrap is-align-items-center " >
+    <div className="columns 
+    is-flex 
+    is-flex-direction-column 
+    is-align-items-center " >
 
-
-{topHeadlinesData.articles && topHeadlinesData.articles.map((article, articleIndex) => (
+<div className="ticker-wrapper  is-align-items-center ">
+            <div className="ticker">
+              {topHeadlinesData.articles && topHeadlinesData.articles.slice(0,6).map((article, articleIndex) => (
+                <div className="ticker-item" key={articleIndex}>
+                  <Ticker
+                    url={article.url}
+                    name={article.source.name}
+                    publishedAt={article.publishedAt}
+                    title={article.title}
+       
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+          {topHeadlinesData.articles && topHeadlinesData.articles.slice(6,20).map((article, articleIndex) => (
 
 <div className="column rcorners1  is-full is-info has-background-white m-4" 
 style={{ color: 'blue', height: 'auto', width:'90%' }}   key={articleIndex} >
@@ -81,7 +112,6 @@ description={article.description}
   </div>
 
 ))}
-
   </div>
 
     )}

@@ -5,7 +5,7 @@ const axios = require('axios');
 const bodyParser = require('body-parser');
 require('dotenv').config();
 
-console.log('Loaded environment variables:', process.env); // Check if variables are loaded
+console.log('Loaded environment variables:', process.env); 
 
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -14,7 +14,7 @@ const API_KEY = process.env.REACT_APP_NEWS_API_KEY;
 
 if (!API_KEY) {
   console.error('API key is not set!');
-  process.exit(1); // Exit if the API key is not found
+  process.exit(1); 
 }
 
 const topHeadlinesAPI = `https://newsapi.org/v2/top-headlines?country=us&apiKey=${API_KEY}`;
@@ -30,6 +30,8 @@ app.get('/topheadlines', (req, res) => {
     .then(response => res.json(response.data))
     .catch(error => console.error('Error fetching top headlines:', error));
 });
+
+
 
 app.get('/sports', (req, res) => {
   axios.get(sportsAPI)

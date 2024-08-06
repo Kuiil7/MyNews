@@ -17,7 +17,7 @@ if (!API_KEY) {
   process.exit(1); 
 }
 
-const topHeadlinesAPI = `https://newsapi.org/v2/top-headlines?country=us&apiKey=${API_KEY}`;
+const myNews = `https://newsapi.org/v2/top-headlines?country=us&apiKey=${API_KEY}`;
 
 const sportsAPI = `https://newsapi.org/v2/top-headlines?country=us&category=sports&apiKey=${API_KEY}`;
 const healthAPI = `https://newsapi.org/v2/top-headlines?country=us&category=health&apiKey=${API_KEY}`;
@@ -25,8 +25,8 @@ const entertainmentAPI = `https://newsapi.org/v2/top-headlines?country=us&catego
 const technologyAPI = `https://newsapi.org/v2/top-headlines?country=us&category=technology&apiKey=${API_KEY}`;
 const scienceAPI = `https://newsapi.org/v2/top-headlines?country=us&category=science&apiKey=${API_KEY}`;
 
-app.get('/topheadlines', (req, res) => {
-  axios.get(topHeadlinesAPI)
+app.get('/mynews', (req, res) => {
+  axios.get(myNews)
     .then(response => res.json(response.data))
     .catch(error => console.error('Error fetching top headlines:', error));
 });

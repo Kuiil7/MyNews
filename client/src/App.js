@@ -1,7 +1,7 @@
 import React from "react";
 import { Routes, Route} from "react-router-dom";
 
-import TopHeadlines from "./components/endpoints/TopHeadlines";
+import TopHeadlines from "./components/endpoints/MyNews";
 import Sports from "./components/endpoints/Sports";
 import Health from "./components/endpoints/Health";
 import Entertainment from "./components/endpoints/Entertainment";
@@ -18,7 +18,8 @@ const App = () =>{
   <NewsHeader />
       <Routes>
       <Route path="/" element={<TopHeadlines />} />
-        <Route path="topheadlines" element={<TopHeadlines />} />
+        <Route path="mynews" element={<TopHeadlines />} />
+        
         <Route path="sports" element={<Sports/>} />
         <Route path="health" element={<Health/>} />
         <Route path="entertainment" element={<Entertainment/>} />

@@ -15,42 +15,40 @@ const TopHeadlines = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
   
-  useEffect(() => {
-    const fetchData = async () => {
-      setIsLoading(true);
-      setIsError(false);
-      try {
-        const results = await axios.get(topHeadlinesURL, {
-          params: {
-            page: currentPage,
-            pageSize: 10 // Adjust this as needed
-          }
-        });
-        setTopHeadlinesData(prevData => ({
-          articles: [...prevData.articles, ...results.data.articles]
-        }));
-        setHasMore(results.data.articles.length > 0);
-      } catch (error) {
-        setIsError(true);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-    fetchData();
-  }, [topHeadlinesURL, currentPage]);
-  
+useEffect(() => {
+  const fetchData = async () => {
+    setIsLoading(true);
+    setIsError(false);
+    try {
+      const results = await axios.get(topHeadlinesURL, {
+        params: {
+          page: currentPage,
+          pageSize: 10 // Adjust this as needed
+        }
+      });
+      setTopHeadlinesData(prevData => ({
+        articles: [...prevData.articles, ...results.data.articles]
+      }));
+      setHasMore(results.data.articles.length > 0);
+    } catch (error) {
+      setIsError(true);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+  fetchData();
+}, [topHeadlinesURL, currentPage]);
+
   
   return (
     <>
       <div className="container pt-5">
-      <form onSubmit={event => {
-  event.preventDefault();
-  setTopHeadlinesURL(`http://localhost:5000/search/${query}`);
-  setCurrentPage(1); // Reset page number on new search
-  setTopHeadlinesData({ articles: [] }); // Clear previous results
-  setHasMore(true); // Allow loading more results
-}}>
-
+        <form onSubmit={event => {
+          event.preventDefault();
+          setTopHeadlinesURL(`http://localhost:5000/search/${query}`);
+          setCurrentPage(1); // Reset page number on new search
+          setTopHeadlinesData({ articles: [] }); // Clear previous results
+        }}>
           <div className="container">
             <div className="columns is-justify-content-center">
               <div className="column px-5 is-6">
